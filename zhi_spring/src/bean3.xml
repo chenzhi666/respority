@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:aop="http://www.springframework.org/schema/aop" xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+	
+	<bean id="pig" class="cn.itcast.aop.Pig"></bean>
+	<bean id="spig" class="cn.itcast.aop.Strongpig"></bean>
+     <!--  配置aop操作-->
+  <aop:config>
+     <!--     配置切入点-->
+     <aop:pointcut expression="execution(* cn.itcast.aop.Pig.*(..))" id="pointcut1"/>
+     
+       <!--     配置切面，把增强的方法用到上面-->
+     <aop:aspect ref="spig">
+         <!--     配置类型   method 使用哪个增强方法-->
+         <aop:before method="before1" pointcut-ref="pointcut1"/>
+     
+     </aop:aspect>
+  </aop:config>
+    
+	
+	
+	
+</beans>
